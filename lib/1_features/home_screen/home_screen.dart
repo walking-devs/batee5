@@ -115,10 +115,9 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               CircleAvatar(
                                 radius: width * 0.025 > 40 ? 40 : width * 0.025,
-                                foregroundImage:
-                                    imageUrl.startsWith('http')
-                                        ? NetworkImage(imageUrl)
-                                        : AssetImage(imageUrl),
+                                foregroundImage: imageUrl.startsWith('http')
+                                    ? NetworkImage(imageUrl) as ImageProvider
+                                    : AssetImage(imageUrl) as ImageProvider,
                               ),
                               Text(
                                 'category',
