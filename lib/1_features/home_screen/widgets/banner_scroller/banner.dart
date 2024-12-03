@@ -29,10 +29,9 @@ class Batee5Banner extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(width * 0.018),
               image: DecorationImage(
-                image:
-                    imagePath.startsWith("http")
-                        ? NetworkImage(imagePath)
-                        : AssetImage(imagePath),
+                image: imagePath.startsWith("http")
+                    ? NetworkImage(imagePath) as ImageProvider
+                    : AssetImage(imagePath) as ImageProvider,
                 fit: BoxFit.cover,
               ),
             ),
