@@ -68,10 +68,9 @@ class _ProductCardState extends State<ProductCard> {
                   height: width * .19,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image:
-                          widget.imageUrl.startsWith("http")
-                              ? NetworkImage(widget.imageUrl)
-                              : AssetImage(widget.imageUrl),
+                      image: widget.imageUrl.startsWith("http")
+                          ? NetworkImage(widget.imageUrl) as ImageProvider
+                          : AssetImage(widget.imageUrl) as ImageProvider,
                       fit: BoxFit.cover,
                     ),
                   ),
