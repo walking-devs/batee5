@@ -8,7 +8,44 @@ on:
       - "**"
 
 jobs:
+  backend:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Create Firebase credentials
+        run: |
+          cd backend
+          echo '${{ secrets.FIREBASE_CREDENTIALS_JSON }}' > firebase_credentials.json
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+
+      - name: Run backend tests
+        run: |
+          cd backend
+          python -m pytest
+
+      - name: Start backend server
+        run: |
+          cd backend
+          python run.py &
+        env:
+          FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
+          FIREBASE_CREDENTIALS_PATH: "firebase_credentials.json"
+
   validate:
+    needs: backend
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
