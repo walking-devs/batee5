@@ -3,7 +3,7 @@
 A Flutter application with a Flask backend, using Firebase for data storage.
 
 ## Project Structure
-
+```
 batee5/
 ├── backend/
 │ ├── app/
@@ -17,6 +17,7 @@ batee5/
 │ ├── requirements.txt # Python dependencies
 │ └── run.py # Server entry point
 └── [Flutter files]
+```
 
 
 ## Backend Setup
