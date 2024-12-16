@@ -8,9 +8,53 @@ import 'package:batee5/a_core/widgets/batee5_search_bar.dart';
 import 'package:batee5/a_core/widgets/product_card/product_card.dart';
 import 'package:batee5/a_core/widgets/svg_button.dart';
 import 'package:flutter/material.dart';
+import 'package:batee5/a_core/services/api_service.dart';
+import 'package:batee5/a_core/models/category.dart';
+import 'package:batee5/a_core/models/product.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final ApiService _apiService = ApiService();
+  Map<String, Category> categories = {};
+  Map<String, Product> products = {};
+  String selectedCategory = 'electronics'; // Default category
+  
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+  
+  Future<void> _loadData() async {
+    try {
+      final cats = await _apiService.getCategories();
+      final prods = await _apiService.getProductsByCategory(selectedCategory);
+      
+      setState(() {
+        categories = cats;
+        products = prods;
+      });
+    } catch (e) {
+      // Handle error
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<void> _toggleFavorite(String productId) async {
+    try {
+      final newStatus = await _apiService.toggleFavorite(selectedCategory, productId);
+      setState(() {
+        products[productId]?.isFavorite = newStatus;
+      });
+    } catch (e) {
+      // Handle error
+      debugPrint(e.toString());
+    }
+  }
 
   double height = 0;
   double width = 0;
@@ -140,30 +184,32 @@ class HomeScreen extends StatelessWidget {
                 spacing: 35,
                 crossAxisCount: 3,
                 title: 'Special Items',
-                fullItemCount: 22,
-                items: List.filled(
-                  60,
-                  Column(
-                    children: [
-                      ProductCard(
-                        size: width * .35,
-                        onPressed: () {
-                          debugPrint('product pressed');
-                        },
-                        isFavorite: true,
-                        imageUrl: 'assets/images/kataketo.jpeg',
-                        title: 'Kataketo',
-                        description: 'Best chocolate in egypt',
-                        price: 15,
-                        location: '',
-                        dateListed: DateTime(2024, 11, 1),
-                        // area: 0,
-                        // numberOfBedrooms: 3,
-                        // numberOfBathrooms: 3,
-                      ),
-                    ],
-                  ),
-                ),
+                fullItemCount: products.length,
+                items: products.values.map((product) => Column(
+                  children: [
+                    ProductCard(
+                      id: product.id,
+                      category: product.category,
+                      size: width * .35,
+                      onPressed: () {
+                        debugPrint('product pressed');
+                      },
+                      onFavoriteToggled: (bool newStatus) {
+                        _toggleFavorite(product.id);
+                      },
+                      isFavorite: product.isFavorite,
+                      imageUrl: product.imageUrl,
+                      title: product.title,
+                      description: product.description,
+                      price: product.price,
+                      location: product.location,
+                      dateListed: product.dateListed,
+                      area: product.area,
+                      numberOfBedrooms: product.numberOfBedrooms,
+                      numberOfBathrooms: product.numberOfBathrooms,
+                    ),
+                  ],
+                )).toList(),
                 mainAxisExtent: width * .47,
               ),
               SizedBox(height: height * .145),

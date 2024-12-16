@@ -17,6 +17,9 @@ class ProductCard extends StatefulWidget {
   final int? area;
   bool isFavorite;
   final VoidCallback? onPressed;
+  final String id;
+  final String category;
+  final Function(bool) onFavoriteToggled;
   ProductCard({
     super.key,
     required this.imageUrl,
@@ -31,6 +34,9 @@ class ProductCard extends StatefulWidget {
     required this.isFavorite,
     required this.onPressed,
     required this.size,
+    required this.id,
+    required this.category,
+    required this.onFavoriteToggled,
   });
 
   @override
