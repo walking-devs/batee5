@@ -44,5 +44,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Environment variables (Firebase)
+# Environment variables
 .env
+
+# Virtual environment
+**/venv/

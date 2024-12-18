@@ -1,0 +1,16 @@
+# Database
+*.db
+*.sqlite
+
+# Environment variables
+.env
+.env.*
+
+# Migration versions
+migrations/versions/*
+!migrations/versions/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class

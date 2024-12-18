@@ -1,6 +1,6 @@
 # Batee5 - Flutter & Flask Application
 
-A Flutter application with a Flask backend, using Firebase for data storage.
+A Flutter application with a Flask backend, using PostgreSQL for data storage.
 
 ## Project Structure
 ```
@@ -9,11 +9,14 @@ batee5/
 │ ├── app/
 │ │ ├── init.py # Flask app initialization
 │ │ ├── config.py # Configuration settings
+│ │ ├── models.py # Database models
 │ │ ├── routes/ # API endpoints
 │ │ │ ├── category_routes.py
 │ │ │ └── product_routes.py
 │ │ └── services/ # Business logic
-│ │ └── firebase_service.py
+│ │     ├── database_service.py
+│ │     └── product_service.py
+│ ├── migrations/ # Database migrations
 │ ├── requirements.txt # Python dependencies
 │ └── run.py # Server entry point
 └── [Flutter files]
@@ -26,16 +29,16 @@ batee5/
 ```bash
 cd backend
 ```
+
 2. Create a virtual environment:
-
-
 ```bash
 python -m venv venv
 ```
+
+3. Activate the virtual environment:
 ### Windows
 ```bash
 venv\Scripts\activate
-
 ```
 
 ### Unix/MacOS
@@ -43,20 +46,26 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
+4. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-5. Firebase Setup:
-   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
-   - Download your Firebase Admin SDK credentials JSON
+5. Database Setup:
+   - Install PostgreSQL if not already installed
+   - Create a database for the application
    - Create `.env` file in the `backend` directory:
    ```
-   FIREBASE_DATABASE_URL=your_firebase_database_url
-   FIREBASE_CREDENTIALS_PATH=path_to_your_credentials.json
+   DATABASE_URL=postgresql://username:password@localhost:5432/database_name
    ```
+   (change to your username, password and database name.)
 
-6. Run the server:
+6. Initialize the database:
+```bash
+flask setup-db
+```
+
+7. Run the server:
 ```bash
 # Make sure you're in the backend directory
 python run.py
@@ -72,10 +81,11 @@ The backend server will start at `http://localhost:5000` with the following endp
    - Make sure you've activated the virtual environment
    - Run `pip install -r requirements.txt` again
 
-2. If Firebase fails to initialize:
+2. If database connection fails:
    - Check your `.env` file exists in the backend directory
-   - Verify your Firebase credentials JSON path is correct
-   - Ensure Firebase Database URL is correct
+   - Verify your PostgreSQL service is running
+   - Ensure DATABASE_URL is correct in .env
+   - Try connecting to the database using psql to verify credentials
 
 
 

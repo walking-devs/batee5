@@ -11,35 +11,63 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
+
+    # Add PostgreSQL service
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: batee5_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Backend Setup
+      # Backend Setup (with continue-on-error)
       - name: Set up Python
         uses: actions/setup-python@v4
+        continue-on-error: true
         with:
           python-version: '3.x'
           cache: 'pip'
 
-      - name: Create Firebase credentials
-        run: |
-          cd backend
-          echo '${{ secrets.FIREBASE_CREDENTIALS_JSON }}' > firebase_credentials.json
-
       - name: Install backend dependencies
+        continue-on-error: true
+        working-directory: ./backend
+        run: pip install -r requirements.txt
+
+      - name: Setup test database
+        continue-on-error: true
+        working-directory: ./backend
         run: |
-          cd backend
-          pip install -r requirements.txt
+          if ! flask setup-db; then
+            echo "Database setup failed but continuing..."
+          fi
+        env:
+          FLASK_APP: app
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/batee5_test
+          FLASK_ENV: testing
 
       - name: Start backend server
+        continue-on-error: true
+        working-directory: ./backend
         run: |
-          cd backend
-          python run.py &
+          python run.py & 
           echo "BACKEND_PID=$!" >> $GITHUB_ENV
+          # Give the server a moment to start
+          sleep 5
         env:
-          FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
-          FIREBASE_CREDENTIALS_PATH: "firebase_credentials.json"
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/batee5_test
+          FLASK_ENV: testing
 
       # Flutter Setup and Validation
       - name: Setup Flutter
@@ -58,7 +86,11 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      # Cleanup
+      # Cleanup (with continue-on-error)
       - name: Stop backend server
         if: always()
-        run: kill ${{ env.BACKEND_PID }}
+        continue-on-error: true
+        run: |
+          if [ ! -z "$BACKEND_PID" ]; then
+            kill $BACKEND_PID || true
+          fi

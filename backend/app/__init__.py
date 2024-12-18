@@ -1,24 +1,25 @@
 from flask import Flask
 from flask_cors import CORS
 from app.config import Config
-import firebase_admin
-from firebase_admin import credentials
+from app.models import db
+from flask_migrate import Migrate
 
-def create_app():
+def create_app(env='development'):
     app = Flask(__name__)
+    app.config.from_object(Config)
     CORS(app)
     
-    # Initialize Firebase
-    cred = credentials.Certificate(Config.FIREBASE_CREDENTIALS_PATH)
-    firebase_admin.initialize_app(cred, {
-        'databaseURL': Config.FIREBASE_DATABASE_URL
-    })
+    db.init_app(app)
+    migrate = Migrate(app, db)
     
-    # Import and register blueprints
+    # Register blueprints
     from app.routes.category_routes import categories_bp
     from app.routes.product_routes import products_bp
-    
     app.register_blueprint(categories_bp)
     app.register_blueprint(products_bp)
+    
+    # Register CLI commands
+    from app.cli import register_commands
+    register_commands(app)
     
     return app

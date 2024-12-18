@@ -1,5 +1,8 @@
 flask==2.3.3
 werkzeug==2.3.7
-firebase-admin==5.0.0
 python-dotenv==0.19.0
 flask-cors==3.0.10
+flask-sqlalchemy==3.0.2
+flask-migrate==4.0.5
+psycopg2-binary==2.9.5
+click==8.1.7  # Added this
