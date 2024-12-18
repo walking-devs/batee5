@@ -32,33 +32,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Backend Setup (with continue-on-error)
+      # Backend Setup
       - name: Set up Python
         uses: actions/setup-python@v4
-        continue-on-error: true
         with:
           python-version: '3.x'
           cache: 'pip'
 
       - name: Install backend dependencies
-        continue-on-error: true
         working-directory: ./backend
         run: pip install -r requirements.txt
 
       - name: Setup test database
-        continue-on-error: true
         working-directory: ./backend
-        run: |
-          if ! flask setup-db; then
-            echo "Database setup failed but continuing..."
-          fi
+        run: flask setup-db
         env:
           FLASK_APP: app
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/batee5_test
           FLASK_ENV: testing
 
       - name: Start backend server
-        continue-on-error: true
         working-directory: ./backend
         run: |
           python run.py & 
@@ -86,10 +79,9 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      # Cleanup (with continue-on-error)
+      # Cleanup
       - name: Stop backend server
         if: always()
-        continue-on-error: true
         run: |
           if [ ! -z "$BACKEND_PID" ]; then
             kill $BACKEND_PID || true
