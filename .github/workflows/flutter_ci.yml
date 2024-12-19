@@ -11,10 +11,58 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
+
+    # Add PostgreSQL service
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: batee5_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Backend Setup
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: pip install -r requirements.txt
+
+      - name: Setup test database
+        working-directory: ./backend
+        run: flask setup-db
+        env:
+          FLASK_APP: app
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/batee5_test
+          FLASK_ENV: testing
+
+      - name: Start backend server
+        working-directory: ./backend
+        run: |
+          python run.py & 
+          echo "BACKEND_PID=$!" >> $GITHUB_ENV
+          # Give the server a moment to start
+          sleep 5
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/batee5_test
+          FLASK_ENV: testing
+
+      # Flutter Setup and Validation
       - name: Setup Flutter
         uses: subosito/flutter-action@v2.12.0
         with:
@@ -26,7 +74,15 @@ jobs:
         run: flutter pub get
 
       - name: Analyze code
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings # remove flags if you want to treat infos and warnings as errors
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Run tests
         run: flutter test
+
+      # Cleanup
+      - name: Stop backend server
+        if: always()
+        run: |
+          if [ ! -z "$BACKEND_PID" ]; then
+            kill $BACKEND_PID || true
+          fi
