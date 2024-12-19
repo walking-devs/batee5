@@ -1,4 +1,5 @@
 from app.models import db, Category, Product
+from datetime import datetime
 
 class DatabaseService:
     @staticmethod
@@ -7,18 +8,28 @@ class DatabaseService:
         return {str(cat.id): {'name': cat.name, 'description': cat.description} for cat in categories}
     
     @staticmethod
-    def get_products(category_id=None):
-        if category_id:
-            products = Product.query.filter_by(category_id=category_id).all()
+    def get_products(category=None):
+        if category:
+            products = Product.query.join(Category).filter(
+                Category.name.ilike(category)
+            ).all()
         else:
             products = Product.query.all()
         
         return {str(prod.id): {
+            'id': str(prod.id),
             'name': prod.name,
+            'title': prod.name,
             'description': prod.description,
             'price': prod.price,
-            'imageUrl': prod.image_url,  # Added this field
-            'isFavorite': prod.is_favorite
+            'imageUrl': prod.image_url,
+            'isFavorite': prod.is_favorite,
+            'category': prod.category.name.lower(),
+            'dateListed': datetime.now().isoformat(),
+            'location': 'Egypt',
+            'area': None,
+            'numberOfBathrooms': None,
+            'numberOfBedrooms': None
         } for prod in products}
     
     @staticmethod

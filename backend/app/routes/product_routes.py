@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.services.database_service import DatabaseService
+from app.models.category import Category
 
 products_bp = Blueprint('products', __name__)
 db_service = DatabaseService()
@@ -31,3 +32,16 @@ def create_product():
     if 'error' in result:
         return jsonify(result), 400
     return jsonify(result), 201
+
+@products_bp.route('/debug/categories', methods=['GET'])
+def debug_categories():
+    categories = Category.query.all()
+    return jsonify([{
+        'id': c.id,
+        'name': c.name,
+        'products': [{
+            'id': p.id,
+            'name': p.name,
+            'category': p.category.name
+        } for p in c.products]
+    } for c in categories])

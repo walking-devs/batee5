@@ -7,14 +7,12 @@ def seed_development_data(db):
     db.create_all()
     
     # Create sample categories
-    categories = [
-        Category(name='Electronics', description='Electronic devices and gadgets'),
-        Category(name='Clothing', description='Fashion and apparel'),
-        Category(name='Books', description='Books and literature'),
-        Category(name='Home', description='Home and furniture items')
-    ]
+    electronics = Category(name='Electronics', description='Electronic devices and gadgets')
+    clothing = Category(name='Clothing', description='Fashion and apparel')
+    books = Category(name='Books', description='Books and literature')
+    home = Category(name='Home', description='Home and furniture items')
     
-    db.session.add_all(categories)
+    db.session.add_all([electronics, clothing, books, home])
     db.session.commit()
     
     # Create sample products
@@ -25,7 +23,7 @@ def seed_development_data(db):
             description='Latest smartphone with amazing features',
             price=20999.99,
             image_url='https://www.publicdomainpictures.net/pictures/170000/velka/smartphone-mobile-phone-cellphone.jpg',
-            category_id=1,
+            category=electronics,
             is_favorite=False
         ),
         Product(
@@ -33,7 +31,7 @@ def seed_development_data(db):
             description='Professional laptop for work and gaming',
             price=10499.99,
             image_url='https://www.publicdomainpictures.net/pictures/10000/velka/1-1216221458n7mg.jpg',
-            category_id=1,
+            category=electronics,
             is_favorite=True
         ),
         
@@ -43,7 +41,7 @@ def seed_development_data(db):
             description='Classic blue denim jeans',
             price=79.99,
             image_url='https://get.pxhere.com/photo/jeans-denim-pocket-textile-trousers-1551899.jpg',
-            category_id=2,
+            category=clothing,
             is_favorite=True
         ),
         
@@ -53,7 +51,7 @@ def seed_development_data(db):
             description='Learn Python programming from scratch',
             price=29.99,
             image_url='https://c4.wallpaperflare.com/wallpaper/805/936/1019/code-python-computer-python-programming-wallpaper-thumb.jpg',
-            category_id=3,
+            category=books,
             is_favorite=False
         ),
         Product(
@@ -61,7 +59,7 @@ def seed_development_data(db):
             description='Bestselling fiction novel',
             price=19.99,
             image_url='https://www.publicdomainpictures.net/pictures/360000/velka/book-15946637087ey.jpg',
-            category_id=3,
+            category=books,
             is_favorite=True
         ),
         
@@ -71,7 +69,7 @@ def seed_development_data(db):
             description='Modern design coffee table',
             price=199.99,
             image_url='https://p1.pxfuel.com/preview/371/619/634/cafe-coffee-tables-chairs.jpg',
-            category_id=4,
+            category=home,
             is_favorite=False
         ),
         Product(
@@ -79,7 +77,7 @@ def seed_development_data(db):
             description='Complete bedroom set with mattress',
             price=899.99,
             image_url='https://www.publicdomainpictures.net/pictures/580000/velka/a-light-wooden-bedroom-setting-1708524754UuS.jpg',
-            category_id=4,
+            category=home,
             is_favorite=True
         )
     ]

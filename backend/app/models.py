@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -15,6 +16,10 @@ class Product(db.Model):
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
     price = db.Column(db.Float, nullable=False)
-    image_url = db.Column(db.String(500))  # Added this field
+    image_url = db.Column(db.String(500))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     is_favorite = db.Column(db.Boolean, default=False)
+    area = db.Column(db.Integer, nullable=True)
+    number_of_bathrooms = db.Column(db.Integer, nullable=True)
+    number_of_bedrooms = db.Column(db.Integer, nullable=True)
+    date_listed = db.Column(db.DateTime, default=datetime.utcnow)

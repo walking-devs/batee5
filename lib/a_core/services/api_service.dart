@@ -21,18 +21,34 @@ class ApiService {
   }
 
   Future<Map<String, Product>> getProductsByCategory(String category) async {
-    final response = await _client.get(
-      Uri.parse('${ApiConstants.baseUrl}${ApiConstants.products}?category=$category'),
-    );
-    
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      return data.map((key, value) => MapEntry(
-        key,
-        Product.fromJson(key, value as Map<String, dynamic>),
-      ));
+    try {
+      final response = await _client.get(
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.products}'),
+      );
+      
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        
+        // Debug print to see the response
+        debugPrint('API Response: $data');
+        
+        final products = <String, Product>{};
+        
+        data.forEach((key, value) {
+          try {
+            products[key] = Product.fromJson(key, value as Map<String, dynamic>);
+          } catch (e) {
+            debugPrint('Error parsing product $key: $e');
+          }
+        });
+        
+        return products;
+      }
+      throw Exception('Failed to load products: ${response.statusCode}');
+    } catch (e) {
+      debugPrint('Error in getProductsByCategory: $e');
+      return {};
     }
-    throw Exception('Failed to load products');
   }
 
   Future<bool> toggleFavorite(String category, String productId) async {
