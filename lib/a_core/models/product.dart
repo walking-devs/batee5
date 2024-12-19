@@ -27,17 +27,17 @@ class Product {
     this.numberOfBedrooms,
   });
 
-  factory Product.fromJson(String id, Map<String, dynamic> json) {
+  factory Product.fromJson(String key, Map<String, dynamic> json) {
     return Product(
-      id: id,
+      id: key,
       category: json['category'] as String,
-      dateListed: DateTime.now(),
+      dateListed: DateTime.parse(json['dateListed'] as String),
       description: json['description'] as String,
-      imageUrl: json['image_url'] as String,
-      isFavorite: json['is_favorite'] as bool,
-      location: 'Egypt',
+      imageUrl: json['imageUrl'] as String,
+      isFavorite: json['isFavorite'] as bool,
+      location: json['location'] as String,
       price: (json['price'] as num).toDouble(),
-      title: json['name'] as String,
+      title: json['title'] as String,
       area: json['area'] as int?,
       numberOfBathrooms: json['numberOfBathrooms'] as int?,
       numberOfBedrooms: json['numberOfBedrooms'] as int?,

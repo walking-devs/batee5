@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.services.database_service import DatabaseService
-from app.models.category import Category
+from app.models import Category
 
 products_bp = Blueprint('products', __name__)
 db_service = DatabaseService()

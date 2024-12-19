@@ -17,7 +17,6 @@ class DatabaseService:
             products = Product.query.all()
         
         return {str(prod.id): {
-            'id': str(prod.id),
             'name': prod.name,
             'title': prod.name,
             'description': prod.description,
