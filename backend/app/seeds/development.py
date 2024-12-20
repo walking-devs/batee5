@@ -22,7 +22,7 @@ def seed_development_data(db):
             name='Gaza Smartphone X',
             description='Latest smartphone with amazing features',
             price=20999.99,
-            image_url='https://ibb.co/4fjh5ct',
+            image_url='https://i.ibb.co/SxKF92y/18.png',
             category=electronics,
             is_favorite=False
         ),
@@ -30,7 +30,7 @@ def seed_development_data(db):
             name='Gaza Laptop Pro',
             description='Professional laptop for work and gaming',
             price=10499.99,
-            image_url='https://ibb.co/CtXN7sM',
+            image_url='https://i.ibb.co/W3dqypP/17.png',
             category=electronics,
             is_favorite=True
         ),
@@ -40,7 +40,7 @@ def seed_development_data(db):
             name='Denim Jeans',
             description='Classic blue denim jeans',
             price=79.99,
-            image_url='https://ibb.co/LRcn1Hc',
+            image_url='https://i.ibb.co/PjPwg0P/16.png',
             category=clothing,
             is_favorite=True
         ),
@@ -50,7 +50,7 @@ def seed_development_data(db):
             name='Python Programming',
             description='Learn Python programming from scratch',
             price=29.99,
-            image_url='https://ibb.co/k1ftwQS',
+            image_url='https://i.ibb.co/ZmP0FWM/15.png',
             category=books,
             is_favorite=False
         ),
