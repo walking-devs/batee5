@@ -22,7 +22,7 @@ def seed_development_data(db):
             name='Gaza Smartphone X',
             description='Latest smartphone with amazing features',
             price=20999.99,
-            image_url='https://www.publicdomainpictures.net/pictures/170000/velka/smartphone-mobile-phone-cellphone.jpg',
+            image_url='https://i.ibb.co/SxKF92y/18.png',
             category=electronics,
             is_favorite=False
         ),
@@ -30,7 +30,7 @@ def seed_development_data(db):
             name='Gaza Laptop Pro',
             description='Professional laptop for work and gaming',
             price=10499.99,
-            image_url='https://www.publicdomainpictures.net/pictures/10000/velka/1-1216221458n7mg.jpg',
+            image_url='https://i.ibb.co/W3dqypP/17.png',
             category=electronics,
             is_favorite=True
         ),
@@ -40,7 +40,7 @@ def seed_development_data(db):
             name='Denim Jeans',
             description='Classic blue denim jeans',
             price=79.99,
-            image_url='https://get.pxhere.com/photo/jeans-denim-pocket-textile-trousers-1551899.jpg',
+            image_url='https://i.ibb.co/PjPwg0P/16.png',
             category=clothing,
             is_favorite=True
         ),
@@ -50,7 +50,7 @@ def seed_development_data(db):
             name='Python Programming',
             description='Learn Python programming from scratch',
             price=29.99,
-            image_url='https://c4.wallpaperflare.com/wallpaper/805/936/1019/code-python-computer-python-programming-wallpaper-thumb.jpg',
+            image_url='https://i.ibb.co/ZmP0FWM/15.png',
             category=books,
             is_favorite=False
         ),
@@ -58,7 +58,7 @@ def seed_development_data(db):
             name='Fiction Novel',
             description='Bestselling fiction novel',
             price=19.99,
-            image_url='https://www.publicdomainpictures.net/pictures/360000/velka/book-15946637087ey.jpg',
+            image_url='https://i.ibb.co/10cc6P5/14.png',
             category=books,
             is_favorite=True
         ),
@@ -68,7 +68,7 @@ def seed_development_data(db):
             name='Coffee Table',
             description='Modern design coffee table',
             price=199.99,
-            image_url='https://p1.pxfuel.com/preview/371/619/634/cafe-coffee-tables-chairs.jpg',
+            image_url='https://i.ibb.co/PTtQ1Qn/13.png',
             category=home,
             is_favorite=False
         ),
@@ -76,7 +76,7 @@ def seed_development_data(db):
             name='Bed Set',
             description='Complete bedroom set with mattress',
             price=899.99,
-            image_url='https://www.publicdomainpictures.net/pictures/580000/velka/a-light-wooden-bedroom-setting-1708524754UuS.jpg',
+            image_url='https://i.ibb.co/fnG6RTf/12.png',
             category=home,
             is_favorite=True
         )
