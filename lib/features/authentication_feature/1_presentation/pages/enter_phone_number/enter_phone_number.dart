@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:phonecodes/phonecodes.dart';
 
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/enter_OTP/enter_OTP.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/enter_phone_number/components/phone_text_feild/phone_text_field.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/custom_app_bar_leading.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/submit_text_button.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/enter_OTP/enter_OTP.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/enter_phone_number/components/phone_text_feild/phone_text_field.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/custom_app_bar_leading.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/submit_text_button.dart';
 import 'package:batee5/a_core/constants/app_colors.dart';
 import 'package:batee5/a_core/utils/validator.dart';
 import 'package:batee5/a_core/widgets/batee5_app_bar/batee5_app_bar.dart';
@@ -42,10 +42,9 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
           backButton: true,
           midText:
               widget.passwordReset ? "Forgot password" : "Enter phone number",
-          description:
-              widget.passwordReset
-                  ? "Please enter the phone number associated with this account "
-                  : "We will send confiramtion message to number you entered",
+          description: widget.passwordReset
+              ? "Please enter the phone number associated with this account "
+              : "We will send confiramtion message to number you entered",
         ),
         barHeight: height * .233,
       ),
@@ -86,9 +85,8 @@ class _EnterPhoneNumberState extends State<EnterPhoneNumber> {
                       // TODO:Send confirmation code
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder:
-                              (context) =>
-                                  EnterOTP(passwordReset: widget.passwordReset),
+                          builder: (context) =>
+                              EnterOTP(passwordReset: widget.passwordReset),
                         ),
                       );
                     },

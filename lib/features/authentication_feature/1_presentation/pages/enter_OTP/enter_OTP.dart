@@ -1,8 +1,8 @@
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/enter_OTP/components/OTP_field.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/password_screen/password_screen.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/custom_app_bar_leading.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/question_button.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/submit_text_button.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/enter_OTP/components/OTP_field.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/password_screen/password_screen.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/custom_app_bar_leading.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/question_button.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/submit_text_button.dart';
 import 'package:batee5/a_core/constants/app_colors.dart';
 import 'package:batee5/a_core/utils/validator.dart';
 import 'package:batee5/a_core/widgets/batee5_app_bar/batee5_app_bar.dart';
@@ -61,48 +61,47 @@ class _EnterOTPState extends State<EnterOTP> {
                     Validator.validateOTP(inputOTP, realOTP)
                         ? SizedBox()
                         : loading
-                        ? Text(
-                          "0 : $time",
-                          style: TextStyle(
-                            color: AppColors.darkGrey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                        : QuestionButton(
-                          onPressed: () async {
-                            setState(() {
-                              loading = true;
-                            });
-                            for (var i = 0; i < 30; i++) {
-                              await Future.delayed(
-                                const Duration(seconds: 1),
-                                () {
-                                  time = time - 1;
-                                  setState(() {});
-                                },
-                              );
-                            }
+                            ? Text(
+                                "0 : $time",
+                                style: TextStyle(
+                                  color: AppColors.darkGrey,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            : QuestionButton(
+                                onPressed: () async {
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  for (var i = 0; i < 30; i++) {
+                                    await Future.delayed(
+                                      const Duration(seconds: 1),
+                                      () {
+                                        time = time - 1;
+                                        setState(() {});
+                                      },
+                                    );
+                                  }
 
-                            setState(() {
-                              time = 30;
-                              loading = false;
-                            });
-                            print("Resend OTP");
-                          },
-                          questionText: 'Didn’t receive message ?',
-                          buttonText: 'Resend OTP',
-                        ),
+                                  setState(() {
+                                    time = 30;
+                                    loading = false;
+                                  });
+                                  print("Resend OTP");
+                                },
+                                questionText: 'Didn’t receive message ?',
+                                buttonText: 'Resend OTP',
+                              ),
                     SizedBox(height: 40),
                     SubmitTextButton(
                       text: "Next",
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder:
-                                (context) => PasswordScreen(
-                                  passwordReset: widget.passwordReset,
-                                ),
+                            builder: (context) => PasswordScreen(
+                              passwordReset: widget.passwordReset,
+                            ),
                           ),
                         );
                       },

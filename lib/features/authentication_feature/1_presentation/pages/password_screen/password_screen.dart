@@ -1,6 +1,6 @@
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/custom_app_bar_leading.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/labeled_input_field.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/submit_text_button.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/custom_app_bar_leading.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/labeled_input_field.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/submit_text_button.dart';
 import 'package:batee5/a_core/widgets/batee5_app_bar/batee5_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -34,10 +34,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
         title: CustomAppBarLeading(
           backButton: true,
           midText: widget.passwordReset ? "New password" : "Enter Password",
-          description:
-              widget.passwordReset
-                  ? "Please Create new password"
-                  : "Please Enter password",
+          description: widget.passwordReset
+              ? "Please Create new password"
+              : "Please Enter password",
         ),
         barHeight: height * .233,
       ),
@@ -81,10 +80,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   alignment: Alignment(0, .05),
                   child: SubmitTextButton(
                     isEnabled: true,
-                    text:
-                        widget.passwordReset
-                            ? "Reset Password"
-                            : "Create Account",
+                    text: widget.passwordReset
+                        ? "Reset Password"
+                        : "Create Account",
                     onPressed: () {
                       if (password1 == password2) {
                         setState(() {

@@ -1,7 +1,7 @@
-import 'package:batee5/1_features/home_screen/widgets/banner_scroller/banner.dart';
-import 'package:batee5/1_features/home_screen/widgets/banner_scroller/banner_scroller.dart';
-import 'package:batee5/1_features/home_screen/widgets/location_selector.dart';
-import 'package:batee5/1_features/home_screen/widgets/preview_section/preview_section.dart';
+import 'package:batee5/features/home_screen/widgets/banner_scroller/banner.dart';
+import 'package:batee5/features/home_screen/widgets/banner_scroller/banner_scroller.dart';
+import 'package:batee5/features/home_screen/widgets/location_selector.dart';
+import 'package:batee5/features/home_screen/widgets/preview_section/preview_section.dart';
 import 'package:batee5/a_core/constants/app_colors.dart';
 import 'package:batee5/a_core/widgets/batee5_app_bar/batee5_app_bar.dart';
 import 'package:batee5/a_core/widgets/batee5_search_bar.dart';
@@ -9,8 +9,8 @@ import 'package:batee5/a_core/widgets/product_card/product_card.dart';
 import 'package:batee5/a_core/widgets/svg_button.dart';
 import 'package:flutter/material.dart';
 import 'package:batee5/a_core/services/api_service.dart';
-import 'package:batee5/a_core/models/category.dart';
-import 'package:batee5/a_core/models/product.dart';
+import 'package:batee5/data/models/category.dart';
+import 'package:batee5/data/models/product.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -22,18 +22,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Map<String, Category> categories = {};
   Map<String, Product> products = {};
   String selectedCategory = 'electronics'; // Default category
-  
+
   @override
   void initState() {
     super.initState();
     _loadData();
   }
-  
+
   Future<void> _loadData() async {
     try {
       final cats = await _apiService.getCategories();
       final prods = await _apiService.getProductsByCategory(selectedCategory);
-      
+
       setState(() {
         categories = cats;
         products = prods;
@@ -46,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _toggleFavorite(String productId) async {
     try {
-      final newStatus = await _apiService.toggleFavorite(selectedCategory, productId);
+      final newStatus =
+          await _apiService.toggleFavorite(selectedCategory, productId);
       setState(() {
         products[productId]?.isFavorite = newStatus;
       });
@@ -185,31 +186,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisCount: 3,
                 title: 'Special Items',
                 fullItemCount: products.length,
-                items: products.values.map((product) => Column(
-                  children: [
-                    ProductCard(
-                      id: product.id,
-                      category: product.category,
-                      size: width * .35,
-                      onPressed: () {
-                        debugPrint('product pressed');
-                      },
-                      onFavoriteToggled: (bool newStatus) {
-                        _toggleFavorite(product.id);
-                      },
-                      isFavorite: product.isFavorite,
-                      imageUrl: product.imageUrl,
-                      title: product.title,
-                      description: product.description,
-                      price: product.price,
-                      location: product.location,
-                      dateListed: product.dateListed,
-                      area: product.area,
-                      numberOfBedrooms: product.numberOfBedrooms,
-                      numberOfBathrooms: product.numberOfBathrooms,
-                    ),
-                  ],
-                )).toList(),
+                items: products.values
+                    .map((product) => Column(
+                          children: [
+                            ProductCard(
+                              id: product.id,
+                              category: product.category,
+                              size: width * .35,
+                              onPressed: () {
+                                debugPrint('product pressed');
+                              },
+                              onFavoriteToggled: (bool newStatus) {
+                                _toggleFavorite(product.id);
+                              },
+                              isFavorite: product.isFavorite,
+                              imageUrl: product.imageUrl,
+                              title: product.title,
+                              description: product.description,
+                              price: product.price,
+                              location: product.location,
+                              dateListed: product.dateListed,
+                              area: product.area,
+                              numberOfBedrooms: product.numberOfBedrooms,
+                              numberOfBathrooms: product.numberOfBathrooms,
+                            ),
+                          ],
+                        ))
+                    .toList(),
                 mainAxisExtent: width * .47,
               ),
               SizedBox(height: height * .145),

@@ -1,4 +1,4 @@
-import 'package:batee5/1_features/home_screen/home_screen.dart';
+import 'package:batee5/features/home_screen/home_screen.dart';
 import 'package:batee5/a_core/config/app_router.dart';
 import 'package:batee5/a_core/config/apptheme.dart';
 import 'package:batee5/a_core/widgets/bottom_nav_bar.dart';

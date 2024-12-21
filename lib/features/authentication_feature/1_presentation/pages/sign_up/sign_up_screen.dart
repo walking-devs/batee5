@@ -1,12 +1,12 @@
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/enter_phone_number/enter_phone_number.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/sign_in/sign_in_screen.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/custom_app_bar_leading.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/question_button.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/svg_icon_button.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/enter_phone_number/enter_phone_number.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/sign_in/sign_in_screen.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/custom_app_bar_leading.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/question_button.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/svg_icon_button.dart';
 import 'package:batee5/a_core/constants/app_colors.dart';
 import 'package:batee5/a_core/widgets/batee5_app_bar/batee5_app_bar.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/labeled_input_field.dart';
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/widgets/submit_text_button.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/labeled_input_field.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/widgets/submit_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -78,9 +78,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder:
-                            (context) =>
-                                const EnterPhoneNumber(passwordReset: false),
+                        builder: (context) =>
+                            const EnterPhoneNumber(passwordReset: false),
                       ),
                     );
                   },

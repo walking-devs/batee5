@@ -1,4 +1,4 @@
-import 'package:batee5/1_features/change_location/widgets/location_picker.dart';
+import 'package:batee5/features/change_location/widgets/location_picker.dart';
 import 'package:batee5/a_core/widgets/filter_search/components/search_section.dart';
 import 'package:batee5/a_core/widgets/filter_search/filter_search.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +31,9 @@ class ChangeLocation extends StatelessWidget {
   double width = 0;
   @override
   Widget build(BuildContext context) {
-    width =
-        MediaQuery.of(context).size.width > 300
-            ? 300
-            : MediaQuery.of(context).size.width;
+    width = MediaQuery.of(context).size.width > 300
+        ? 300
+        : MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

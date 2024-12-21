@@ -1,4 +1,4 @@
-import 'package:batee5/1_features/authentication_feature/1_presentation/pages/enter_phone_number/components/phone_text_feild/custom_drop_down_menu.dart';
+import 'package:batee5/features/authentication_feature/1_presentation/pages/enter_phone_number/components/phone_text_feild/custom_drop_down_menu.dart';
 import 'package:batee5/a_core/utils/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:phonecodes/phonecodes.dart';
@@ -89,14 +89,12 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
 
                           if (value.startsWith('+')) {
                             enabled = true;
-                            countryCodes =
-                                Countries.list
-                                    .where(
-                                      (element) =>
-                                          element.dialCode.contains(value),
-                                    )
-                                    .map((e) => e.dialCode)
-                                    .toList();
+                            countryCodes = Countries.list
+                                .where(
+                                  (element) => element.dialCode.contains(value),
+                                )
+                                .map((e) => e.dialCode)
+                                .toList();
                           }
                           phoneNumber = controller.text;
                         });

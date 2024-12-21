@@ -34,7 +34,7 @@ class QuestionButton extends StatelessWidget {
           child: Text(
             buttonText,
             style: TextStyle(
-              color: AppColors.navyBlue,
+              color: AppColors.mainGreen,
               fontSize: .037 * width > 14 ? 14 : .037 * width,
               fontWeight: FontWeight.w600,
             ),
