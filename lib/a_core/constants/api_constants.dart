@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:html';
+import 'package:http/http.dart' as http;
+
 class ApiConstants {
-  static const String baseUrl = 'http://localhost:5000';
+  // Production backend URL
+  static const String baseUrl = 'https://batee5-backend-production.up.railway.app';
   
   // Endpoints
   static const String categories = '/categories';
