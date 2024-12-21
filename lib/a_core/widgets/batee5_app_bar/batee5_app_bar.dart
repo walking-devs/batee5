@@ -23,11 +23,8 @@ class Batee5AppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       toolbarHeight: toolbarHeight,
       title: title,
-      actions: [...actions ?? []],
-      backgroundColor: AppColors.navyBlue,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
-      ),
+      actions: actions ?? [],
+      backgroundColor: Colors.black,
     );
   }
 

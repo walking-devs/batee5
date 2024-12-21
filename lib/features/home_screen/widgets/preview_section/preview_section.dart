@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-import 'package:batee5/1_features/home_screen/widgets/preview_section/components/underline_button.dart';
+import 'package:batee5/features/home_screen/widgets/preview_section/components/underline_button.dart';
 import 'package:batee5/a_core/constants/app_colors.dart';
 
 class PreviewSection extends StatelessWidget {
@@ -36,7 +36,7 @@ class PreviewSection extends StatelessWidget {
                   title,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: width * 0.04 > 16 ? 16 : width * 0.04,
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Poppins',
                   ),

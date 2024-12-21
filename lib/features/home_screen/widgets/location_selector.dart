@@ -10,10 +10,9 @@ class LocationSelector extends StatelessWidget {
   double width = 0;
   @override
   Widget build(BuildContext context) {
-    width =
-        MediaQuery.of(context).size.width / 2 > 500
-            ? 500
-            : MediaQuery.of(context).size.width / 2;
+    width = MediaQuery.of(context).size.width / 2 > 500
+        ? 500
+        : MediaQuery.of(context).size.width / 2;
     // height = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () {
@@ -23,25 +22,25 @@ class LocationSelector extends StatelessWidget {
         //TODO: implement the location selection
       },
       child: SizedBox(
-        width: width * 0.239,
+        width: 120,
         child: Row(
           children: [
-            SvgPicture.asset(width: width * 0.026, 'assets/icons/location.svg'),
+            SvgPicture.asset(width: 15, 'assets/icons/location.svg'),
             SizedBox(width: width * 0.01),
             Text(
               //TODO: replace with the selected location
               'Egypt',
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontFamily: 'Poppins',
-                fontSize: width * 0.04,
+                fontSize: 20,
                 fontWeight: FontWeight.w600,
               ),
             ),
             SizedBox(width: width * 0.01),
             Icon(
               Icons.keyboard_arrow_down_rounded,
-              size: width * 0.04,
+              size: 20,
               color: AppColors.darkGrey,
             ),
           ],

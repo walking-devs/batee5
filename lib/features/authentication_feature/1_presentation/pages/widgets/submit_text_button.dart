@@ -9,7 +9,7 @@ class SubmitTextButton extends StatelessWidget {
 
   SubmitTextButton({
     super.key,
-    this.color = const Color(0xFF03346E),
+    this.color = const Color(0xFF006400),
     required this.text,
     this.isEnabled = false,
     this.onPressed,
