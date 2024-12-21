@@ -27,14 +27,15 @@ class Batee5SearchBar extends StatelessWidget {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Container(
-      width: width * 0.7,
-      height: 60,
+      width: 600,
+      height: 40,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         color: AppColors.lightGrey,
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: TextField(
+        textAlignVertical: TextAlignVertical.center,
         enabled: enabled,
         onTap: () {
           if (onTap!() != null) {
@@ -54,10 +55,11 @@ class Batee5SearchBar extends StatelessWidget {
         },
         decoration: InputDecoration(
           hintText: hintText,
+
           hintStyle: TextStyle(
-            height: 2.1,
+            height: 1.7,
             fontWeight: FontWeight.w400,
-            fontSize: width * 0.032 > 25 ? 25 : width * 0.032,
+            fontSize: 20,
             color: AppColors.darkGrey,
           ),
           // hintText: hintText,

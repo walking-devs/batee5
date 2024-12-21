@@ -37,7 +37,7 @@ class _SignUpScreenState extends State<SignInScreen> {
       backgroundColor: Colors.white,
       appBar: Batee5AppBar(
         toolbarHeight: height * .25,
-        title: const CustomAppBarLeading(
+        title: CustomAppBarLeading(
           leadingText: "Batee5",
           midText: "Welcome back",
           description: 'log in',

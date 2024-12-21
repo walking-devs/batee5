@@ -57,7 +57,7 @@ class _ProductCardState extends State<ProductCard> {
       },
       child: Container(
         width: width * .3,
-        height: width * .47,
+        height: width * .52,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(2),
           border: Border.all(
@@ -69,6 +69,7 @@ class _ProductCardState extends State<ProductCard> {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   height: width * .19,
@@ -106,35 +107,35 @@ class _ProductCardState extends State<ProductCard> {
                       SizedBox(width: width * .005),
                       widget.numberOfBedrooms != null
                           ? SvgPicture.asset(
-                            width: width * .05,
-                            'assets/icons/bedroom.svg',
-                          )
+                              width: width * .05,
+                              'assets/icons/bedroom.svg',
+                            )
                           : const SizedBox(),
                       SizedBox(width: width * .015),
                       widget.numberOfBathrooms != null
                           ? SvgPicture.asset(
-                            width: width * .05,
-                            'assets/icons/bathroom.svg',
-                          )
+                              width: width * .05,
+                              'assets/icons/bathroom.svg',
+                            )
                           : const SizedBox(),
                       SizedBox(width: width * .015),
                       widget.numberOfBedrooms != null
                           ? Row(
-                            children: [
-                              SvgPicture.asset(
-                                width: width * .05,
-                                'assets/icons/area.svg',
-                              ),
-                              SizedBox(width: width * .01),
-                              Text(
-                                "${widget.area} m²",
-                                style: TextStyle(
-                                  color: AppColors.darkGrey2,
-                                  fontSize: width * .032,
+                              children: [
+                                SvgPicture.asset(
+                                  width: width * .05,
+                                  'assets/icons/area.svg',
                                 ),
-                              ),
-                            ],
-                          )
+                                SizedBox(width: width * .01),
+                                Text(
+                                  "${widget.area} m²",
+                                  style: TextStyle(
+                                    color: AppColors.darkGrey2,
+                                    fontSize: width * .032,
+                                  ),
+                                ),
+                              ],
+                            )
                           : const SizedBox(),
                     ],
                   ),
@@ -165,14 +166,13 @@ class _ProductCardState extends State<ProductCard> {
                 width: width * .04,
                 child: OutlinedMultiColorButton(
                   fillColor: Colors.white,
-                  filledIcon:
-                      widget.isFavorite
-                          ? const SizedBox()
-                          : Icon(
-                            size: width * .022,
-                            Icons.favorite_rounded,
-                            color: Colors.red,
-                          ),
+                  filledIcon: widget.isFavorite
+                      ? const SizedBox()
+                      : Icon(
+                          size: width * .022,
+                          Icons.favorite_rounded,
+                          color: Colors.red,
+                        ),
                   borderIcon: Icon(
                     size: width * .022,
                     Icons.favorite_outline_rounded,

@@ -36,7 +36,7 @@ class PreviewSection extends StatelessWidget {
                   title,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: width * 0.04 > 16 ? 16 : width * 0.04,
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Poppins',
                   ),

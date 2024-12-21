@@ -1,5 +1,7 @@
-import 'package:batee5/a_core/constants/app_colors.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:batee5/a_core/constants/app_colors.dart';
 
 class CustomAppBarLeading extends StatelessWidget {
   final String? leadingText;
@@ -8,13 +10,15 @@ class CustomAppBarLeading extends StatelessWidget {
 
   final String? description;
   final bool backButton;
+  Color? midTextColor;
 
-  const CustomAppBarLeading({
+  CustomAppBarLeading({
     super.key,
     this.leadingText,
     this.midText,
     this.description,
     this.backButton = false,
+    this.midTextColor,
   });
 
   @override
@@ -66,8 +70,8 @@ class CustomAppBarLeading extends StatelessWidget {
             : Text(
                 midText!,
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: height * .042,
+                  color: midTextColor ?? Colors.white,
+                  fontSize: 25,
                   fontFamily: "Poppins",
                   fontWeight: FontWeight.w700,
                 ),

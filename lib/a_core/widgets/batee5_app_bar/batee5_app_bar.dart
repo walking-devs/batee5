@@ -23,7 +23,7 @@ class Batee5AppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       toolbarHeight: toolbarHeight,
       title: title,
-      actions: [...actions ?? []],
+      actions: actions ?? [],
       backgroundColor: Colors.black,
     );
   }

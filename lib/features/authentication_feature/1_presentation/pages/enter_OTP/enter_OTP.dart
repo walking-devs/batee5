@@ -30,7 +30,7 @@ class _EnterOTPState extends State<EnterOTP> {
       backgroundColor: Colors.white,
       appBar: Batee5AppBar(
         toolbarHeight: height * .25,
-        title: const CustomAppBarLeading(
+        title: CustomAppBarLeading(
           backButton: true,
           midText: "Enter OTP",
           description:

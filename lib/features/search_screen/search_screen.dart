@@ -28,61 +28,77 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    width =
-        MediaQuery.of(context).size.width > 300
-            ? 300
-            : MediaQuery.of(context).size.width;
+    width = MediaQuery.of(context).size.width > 300
+        ? 300
+        : MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            //Todo: add bloc to unfocus search bar
-            Navigator.of(context).pop();
-          },
-          child: const Icon(Icons.close, size: 24),
-        ),
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Search',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ),
-      body: FilterSearch(
-        hintText: 'What are you looking for ?',
-        sections: [
-          SearchSection(
-            title: "Last Searched",
-            onItmePressed: (index) {
-              // TODO: add bloc to save last searched
-              debugPrint('last searched pressed');
-            },
-            items: lastSearched,
-            leading: SvgPicture.asset(
-              'assets/icons/clock.svg',
-              width: width * .0426,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            SizedBox(
+              width: width > 1200 ? width : 1200,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    AppBar(
+                      leading: GestureDetector(
+                        onTap: () {
+                          //Todo: add bloc to unfocus search bar
+                          Navigator.of(context).pop();
+                        },
+                        child: const Icon(Icons.close, size: 24),
+                      ),
+                      backgroundColor: Colors.white,
+                      title: const Text(
+                        'Search',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    FilterSearch(
+                      hintText: 'What are you looking for ?',
+                      sections: [
+                        SearchSection(
+                          title: "Last Searched",
+                          onItmePressed: (index) {
+                            // TODO: add bloc to save last searched
+                            debugPrint('last searched pressed');
+                          },
+                          items: lastSearched,
+                          leading: SvgPicture.asset(
+                            'assets/icons/clock.svg',
+                            width: width * .0426,
+                          ),
+                          trailing: GestureDetector(
+                            onTap: () {
+                              // TODO: add bloc to delete element
+                              debugPrint('delete element');
+                            },
+                            child: Icon(Icons.close, size: width * .0426),
+                          ),
+                        ),
+                        SearchSection(
+                          title: "Categories",
+                          onItmePressed: (index) {
+                            debugPrint('region ${categories[index]} chosen');
+                          },
+                          items: categories,
+                          trailing: Icon(Icons.arrow_forward_ios_sharp,
+                              size: width * .0426),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
-            trailing: GestureDetector(
-              onTap: () {
-                // TODO: add bloc to delete element
-                debugPrint('delete element');
-              },
-              child: Icon(Icons.close, size: width * .0426),
-            ),
-          ),
-          SearchSection(
-            title: "Categories",
-            onItmePressed: (index) {
-              debugPrint('region ${categories[index]} chosen');
-            },
-            items: categories,
-            trailing: Icon(Icons.arrow_forward_ios_sharp, size: width * .0426),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
