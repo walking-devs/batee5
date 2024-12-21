@@ -11,8 +11,9 @@ def seed_development_data(db):
     clothing = Category(name='Clothing', description='Fashion and apparel')
     books = Category(name='Books', description='Books and literature')
     home = Category(name='Home', description='Home and furniture items')
+    food = Category(name='Food', description='Fresh and packaged food items')
     
-    db.session.add_all([electronics, clothing, books, home])
+    db.session.add_all([electronics, clothing, books, home, food])
     db.session.commit()
     
     # Create sample products
@@ -79,6 +80,16 @@ def seed_development_data(db):
             image_url='https://i.ibb.co/fnG6RTf/12.png',
             category=home,
             is_favorite=True
+        ),
+        
+        # Food
+        Product(
+            name='Katakito',
+            description='Katakito Plain Chocolate With Crisp Wafer',
+            price=9.99,
+            image_url='https://i.ibb.co/Vt7zcH2/katakito.jpg',
+            category=food,
+            is_favorite=False
         )
     ]
     
