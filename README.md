@@ -23,7 +23,7 @@ batee5/
 ```
 
 
-## Backend Setup
+## Backend Setup (for local deployment)
 
 1. Navigate to backend directory:
 ```bash
