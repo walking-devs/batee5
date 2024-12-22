@@ -60,6 +60,13 @@ jobs:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/batee5_test
           FLASK_ENV: testing
 
+      - name: Run backend tests
+        working-directory: ./backend
+        run: python -m pytest tests/
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/batee5_test
+          FLASK_ENV: testing
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2.12.0
         with:
@@ -73,6 +80,9 @@ jobs:
         run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Run tests
+        run: flutter test
+
+      - name: Run frontend tests
         run: flutter test
 
       - name: Stop backend server
